@@ -4,7 +4,7 @@ LDFLAGS  = -lntdll
 
 OUTDIR   = build
 
-all: $(OUTDIR)/devenum.exe $(OUTDIR)/ioctlprobe.exe $(OUTDIR)/dumbfuzz.exe $(OUTDIR)/autofuzz.exe
+all: $(OUTDIR)/devenum.exe $(OUTDIR)/ioctlprobe.exe $(OUTDIR)/dumbfuzz.exe $(OUTDIR)/autofuzz.exe $(OUTDIR)/cortexfuzz.exe
 
 $(OUTDIR)/devenum.exe: enum/devenum.c common/ntdefs.h | $(OUTDIR)
 	$(CC) $(CFLAGS) -o $@ enum/devenum.c $(LDFLAGS)
@@ -17,6 +17,9 @@ $(OUTDIR)/dumbfuzz.exe: fuzz/dumbfuzz.c | $(OUTDIR)
 
 $(OUTDIR)/autofuzz.exe: fuzz/autofuzz.c | $(OUTDIR)
 	$(CC) $(CFLAGS) -o $@ fuzz/autofuzz.c $(LDFLAGS)
+
+$(OUTDIR)/cortexfuzz.exe: fuzz/cortexfuzz.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -o $@ fuzz/cortexfuzz.c $(LDFLAGS)
 
 $(OUTDIR):
 	mkdir -p $(OUTDIR)
